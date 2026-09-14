@@ -1,12 +1,12 @@
 {
   "id": "https://w3id.org/academic-wasteland/yamatai/contract/0.1.0",
   "version": "0.1.0",
-  "bundleDigest": "sha256:1c9588f45d6ef660b173751f6f98b94bb2b12550d8fbc44b00dc6353512ebaa4",
+  "bundleDigest": "sha256:a5b70b99ee5dacbd19fec5d4e0d96b5af4376cf6190d933b9552bb1a4b10a60f",
   "ontologies": [
     {
       "id": "https://w3id.org/academic-wasteland/yamatai/contract/ontology",
       "path": "yamatai.ofn",
-      "digest": "sha256:b66b6784bd5c1ae8b3952ed490084c5549dd9166ab39ea66a111f89c4e765cb8"
+      "digest": "sha256:3f82e4f221285681ff3160e3dd4f41b1530c95c72490dcc3cf4335d086e2d7a0"
     }
   ],
   "acceptedTaskClass": "https://w3id.org/academic-wasteland/yamatai/AcceptedTask",
