@@ -1,0 +1,23 @@
+[town]
+name = "yamatai"
+display = "Yamatai (邪馬台)"
+population = "JPT"
+samples = ["NA18940", "NA18943", "NA18945", "NA18952", "NA18970", "NA18990", "NA19007", "NA19066", "NA19079", "NA19088"]
+rig = "yamatai-rig"
+agent = "pangenome-town.townsfolk"
+citation = "Kulmanov M, Liu Y, Tawfiq R, et al. Phased genome assemblies and pangenome graphs of human populations of Japan and Saudi Arabia. Sci Data 12, 1316 (2025). doi:10.1038/s41597-025-05652-y"
+
+[town.peers]
+ubar = "ubar"
+
+[data]
+graph = "../data/jasapage/JaSaPaGe.gbz"
+vcf = "../data/jasapage/JaSaPaGe.GRCh38.vcf.gz"
+reference_paths = ["GRCh38", "CHM13v2"]
+reference_path_template = "{assembly}#0#{chrom}"
+default_assembly = "GRCh38"
+
+[exchange]
+db = "../data/exchange.db"
+supervisor_url = "http://127.0.0.1:8372"
+state_dir = ".gc/town"
