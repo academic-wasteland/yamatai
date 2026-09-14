@@ -64,16 +64,16 @@ max_wall_seconds = 900
 
 [[sites]]
 # DDBJ (NIG supercomputer) is Yamatai's compute cluster; only Yamatai runs jobs there (decision 2026-09-14).
-# Disabled for now: the `ddbj` alias reaches the gw gateway, whose Slurm client has no configuration ("Could not
-# establish a configuration source"), so jobs must be submitted from an NIG interactive node. Set `host` to an ssh
-# alias for that node, then `enabled = true`. The VCF and its index are present at the paths below; bcftools 1.19 is
-# installed, vg is not, so graph deconstruction cannot run at DDBJ yet.
+# The `ddbj` ssh alias reaches the gw gateway, which has no Slurm configuration; jobs are submitted from the login
+# node a001 (a002 and a003 also work), so every remote step runs as `ssh ddbj ssh a001 ...`. Default partition: epyc.
+# bcftools 1.19 is installed there, vg is not, so graph deconstruction cannot run at DDBJ yet.
 name = "ddbj"
 driver = "ssh"
 host = "ddbj"
+submit_host = "a001"
 workdir = "/home/leechuck/wasteland/yamatai"
 scheduler = "slurm"
-enabled = false
+enabled = true
 datasets = ["graph", "vcf", "jpt-individual-genotypes"]
 tools = ["bcftools"]
 max_cpus = 8

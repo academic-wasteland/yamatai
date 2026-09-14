@@ -77,8 +77,9 @@ Design: [pangenome-town docs](https://github.com/academic-wasteland/pangenome-to
   JaSaPaGe VCF. It resides only at the `ddbj` site, as controlled human data in Japan would.
 - **Sites.** `workstation` (local, bcftools only, 4 CPUs, 16 GB, 15 min) holds the graph and the VCF. `ddbj` is
   **Yamatai's own cluster** (NIG supercomputer): only Yamatai runs jobs there, as Slurm jobs in
-  `/home/leechuck/wasteland/yamatai`. It stays disabled until `host` points at an NIG interactive node, because the
-  `gw` gateway has no Slurm configuration. It has bcftools but no `vg`, so graph deconstruction goes elsewhere.
+  `/home/leechuck/wasteland/yamatai`. The `ddbj` alias reaches the `gw` gateway, which has no Slurm configuration, so
+  every step hops to the login node (`submit_host = "a001"`; a002 and a003 also work) and runs `sbatch` there, on the
+  default `epyc` partition. It has bcftools but no `vg`, so graph deconstruction goes elsewhere.
 - **Rigger.** Ren (`agents/rigger`, local Qwen) plans, validates, and runs compute workflows when
   `[compute] dispatch = "agent"`.
 
