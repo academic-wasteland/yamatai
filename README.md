@@ -67,6 +67,27 @@ Reputation comes from the Wasteland commons (`wl create academic-wasteland/commo
 --local-only`, shared by both towns on this workstation); `[rcp]` in `town.toml`
 sets the threshold. The pack README explains the contract and the pipeline.
 
+## Resources and credentials
+
+Design: [pangenome-town docs](https://github.com/academic-wasteland/pangenome-town/blob/main/docs/resources-and-credentials.md).
+
+- **Trust.** `[trust]` anchors trust in Camelot's demo `ethics-council` (pinned key) and checks revocation at
+  Camelot's registrar. Issuers count only through accreditations that chain to that anchor.
+- **Controlled tier.** `jpt-individual-genotypes` is a *simulated* controlled-access tier over the open
+  JaSaPaGe VCF. It resides only at the `ddbj` site, as controlled human data in Japan would, so until that site
+  is enabled Yamatai admits such tasks but refuses them at the capability gate.
+- **Sites.** `workstation` (local, bcftools only, 4 CPUs, 16 GB, 15 min) holds the graph and the VCF; it does not
+  allow `vg`, so graph deconstruction is referred elsewhere. `ddbj` (ssh) is declared but disabled.
+- **Rigger.** Ren (`agents/rigger`, local Qwen) plans, validates, and runs compute workflows when
+  `[compute] dispatch = "agent"`.
+
+```bash
+pangenome-town compute sites
+pangenome-town holder wallet --holder https://orcid.org/<orcid>
+pangenome-town rcp submit --to ubar --kind allele-frequency --region GRCh38:chr6:29940000-29990000 \
+  --on-behalf-of https://orcid.org/<orcid> --holder https://orcid.org/<orcid>
+```
+
 ## Cost control
 
 Agents run only through OpenRouter (GLM 5.3 Flash) or the lab's own vLLM

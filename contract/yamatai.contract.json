@@ -1,12 +1,12 @@
 {
   "id": "https://w3id.org/academic-wasteland/yamatai/contract/0.1.0",
   "version": "0.1.0",
-  "bundleDigest": "sha256:a5b70b99ee5dacbd19fec5d4e0d96b5af4376cf6190d933b9552bb1a4b10a60f",
+  "bundleDigest": "sha256:b0d4a608a2b9a87a5fe3aec376d165b1e3b12c70e1dcef9406ad38ba91e2bdba",
   "ontologies": [
     {
       "id": "https://w3id.org/academic-wasteland/yamatai/contract/ontology",
       "path": "yamatai.ofn",
-      "digest": "sha256:3f82e4f221285681ff3160e3dd4f41b1530c95c72490dcc3cf4335d086e2d7a0"
+      "digest": "sha256:74e277742de71c6648b3014e78d0f80c25b2d8063ccccacfcbd73f624466c219"
     }
   ],
   "acceptedTaskClass": "https://w3id.org/academic-wasteland/yamatai/AcceptedTask",
@@ -33,6 +33,7 @@
       "https://w3id.org/academic-wasteland/pangenome-town/contract/CHM13Region",
       "https://w3id.org/academic-wasteland/pangenome-town/contract/Gene",
       "https://w3id.org/academic-wasteland/pangenome-town/contract/ReadSet",
+      "https://w3id.org/academic-wasteland/pangenome-town/contract/IndividualGenotypeData",
       "https://w3id.org/academic-wasteland/pangenome-town/contract/GraphSummaryTask",
       "https://w3id.org/academic-wasteland/pangenome-town/contract/RegionExtractionTask",
       "https://w3id.org/academic-wasteland/pangenome-town/contract/HaplotypePresenceTask",
@@ -40,7 +41,11 @@
       "https://w3id.org/academic-wasteland/pangenome-town/contract/GeneLookupTask",
       "https://w3id.org/academic-wasteland/pangenome-town/contract/ReadMappingVariantCallingTask",
       "https://w3id.org/academic-wasteland/pangenome-town/contract/WholeGraphDeconstructTask",
-      "https://w3id.org/academic-wasteland/pangenome-town/contract/PopulationComparisonTask"
+      "https://w3id.org/academic-wasteland/pangenome-town/contract/PopulationComparisonTask",
+      "https://w3id.org/academic-wasteland/pangenome-town/contract/AlleleFrequencyTask",
+      "https://w3id.org/academic-wasteland/pangenome-town/contract/IndividualGenotypeExportTask",
+      "https://w3id.org/academic-wasteland/pangenome-town/contract/AggregateArtifact",
+      "https://w3id.org/academic-wasteland/pangenome-town/contract/IndividualLevelArtifact"
     ],
     "allowedObjectProperties": [
       "https://w3id.org/research-commons/v0.1/partOfRequest",

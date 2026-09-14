@@ -8,6 +8,7 @@ agent = "pangenome-town.townsfolk"
 citation = "Kulmanov M, Liu Y, Tawfiq R, et al. Phased genome assemblies and pangenome graphs of human populations of Japan and Saudi Arabia. Sci Data 12, 1316 (2025). doi:10.1038/s41597-025-05652-y"
 
 [town.peers]
+camelot = "camelot"
 ubar = "ubar"
 
 [data]
@@ -32,3 +33,42 @@ reputation_min_authors = 1
 # Short-circuits: a human operator is always trusted; nobody is blocked.
 trusted_requesters = ["https://orcid.org/0000-0001-8149-5890"]
 blocked_requesters = []
+
+[trust]
+# Where credentials are applied for and their revocation status is checked (Camelot's envoy through the supervisor).
+registrar = "http://127.0.0.1:8372/v0/city/camelot/svc/envoy/"
+revocation = "required"
+# Trust anchors: issuers whose authority this town accepts directly (pinned keys). Other issuers count only
+# through accreditations that chain to an anchor, and the reasoner decides that chain.
+anchors = { "https://w3id.org/academic-wasteland/camelot/issuers/ethics-council" = "ed25519:seGCer9_zlMqtNycVI19l-gW1ppLlR8k_sR4E7CSiI8" }
+
+# Controlled-access tier: a SIMULATED restriction over the open JaSaPaGe VCF. It resides only at DDBJ (as controlled
+# human data in Japan would), so until the ddbj site is enabled this town can admit but not run such tasks.
+[[restricted_datasets]]
+key = "jpt-individual-genotypes"
+iri = "https://w3id.org/academic-wasteland/yamatai/datasets/jpt-individual-genotypes"
+name = "JPT individual genotypes (simulated controlled-access tier)"
+source = "vcf"
+
+[compute]
+dispatch = "inline"
+
+[[sites]]
+name = "workstation"
+driver = "local"
+datasets = ["graph", "vcf"]
+tools = ["bcftools"]
+max_cpus = 4
+max_mem_gb = 16
+max_wall_seconds = 900
+
+[[sites]]
+name = "ddbj"
+driver = "ssh"
+host = "ddbj"
+workdir = "/home/asianhla/wasteland/yamatai"
+scheduler = "none"
+enabled = false
+datasets = ["graph", "vcf", "jpt-individual-genotypes"]
+tools = ["vg", "bcftools"]
+paths = { graph = "/home/asianhla/data/JaSaPaGe/JaSaPaGe.gbz", vcf = "/home/asianhla/data/JaSaPaGe/JaSaPaGe.GRCh38.vcf.gz" }
