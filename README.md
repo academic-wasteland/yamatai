@@ -74,10 +74,11 @@ Design: [pangenome-town docs](https://github.com/academic-wasteland/pangenome-to
 - **Trust.** `[trust]` anchors trust in Camelot's demo `ethics-council` (pinned key) and checks revocation at
   Camelot's registrar. Issuers count only through accreditations that chain to that anchor.
 - **Controlled tier.** `jpt-individual-genotypes` is a *simulated* controlled-access tier over the open
-  JaSaPaGe VCF. It resides only at the `ddbj` site, as controlled human data in Japan would, so until that site
-  is enabled Yamatai admits such tasks but refuses them at the capability gate.
-- **Sites.** `workstation` (local, bcftools only, 4 CPUs, 16 GB, 15 min) holds the graph and the VCF; it does not
-  allow `vg`, so graph deconstruction is referred elsewhere. `ddbj` (ssh) is declared but disabled.
+  JaSaPaGe VCF. It resides only at the `ddbj` site, as controlled human data in Japan would.
+- **Sites.** `workstation` (local, bcftools only, 4 CPUs, 16 GB, 15 min) holds the graph and the VCF. `ddbj` is
+  **Yamatai's own cluster** (NIG supercomputer): only Yamatai runs jobs there, as Slurm jobs in
+  `/home/leechuck/wasteland/yamatai`. It stays disabled until `host` points at an NIG interactive node, because the
+  `gw` gateway has no Slurm configuration. It has bcftools but no `vg`, so graph deconstruction goes elsewhere.
 - **Rigger.** Ren (`agents/rigger`, local Qwen) plans, validates, and runs compute workflows when
   `[compute] dispatch = "agent"`.
 
