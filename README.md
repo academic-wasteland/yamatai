@@ -76,7 +76,7 @@ Design: [pangenome-town docs](https://github.com/academic-wasteland/pangenome-to
 - **Controlled tier.** `jpt-individual-genotypes` is a *simulated* controlled-access tier over the open
   JaSaPaGe VCF. It resides only at the `ddbj` site, as controlled human data in Japan would.
 - **Sites.** `workstation` (local, bcftools only, 4 CPUs, 16 GB, 15 min) holds the graph and the VCF. `ddbj` is
-  **Yamatai's own cluster** (NIG supercomputer): only Yamatai runs jobs there, as Slurm jobs in
+  the **Slurm submission route held by Yamatai** (NIG supercomputer), with jobs in
   `/home/leechuck/wasteland/yamatai`. The `ddbj` alias reaches the `gw` gateway, which has no Slurm configuration, so
   every step hops to the login node (`submit_host = "a001"`; a002 and a003 also work) and runs `sbatch` there, on the
   default `epyc` partition. It has bcftools but no `vg`, so graph deconstruction goes elsewhere.
@@ -97,3 +97,15 @@ Agents run only through OpenRouter (GLM 5.3 Flash) or the lab's own vLLM
 at most, idle timeout 20 minutes. `gc costs` reports usage. `VLLM_API_KEY`
 joins `OPENROUTER_API_KEY` in `~/.gc/secrets.env`, opted in at install time
 with `GC_SUPERVISOR_ENV=VLLM_API_KEY gc supervisor install`.
+
+## Shared storage, published resources and new residents
+
+Saudi and Japanese datasets are logical sample views of the same JaSaPaGe VCF on DDBJ.
+Both towns can run bounded `ddbj-direct` queries; only Yamatai can submit via `ddbj`/`a001`.
+Every delegated dataset execution needs its custodian’s signed task grant.
+See [custody and execution](https://github.com/academic-wasteland/pangenome-town/blob/main/docs/dataset-custody.md).
+
+Both towns publish selected local pangenome results and host **Bloodninja**, a local-Qwen
+comic wizard for fictional role-play and imaginary defense only. Ubar also hosts **Q**,
+the temporal-knowledge-graph specialist, and serves temporal-KG definitions and documents.
+See [resources and residents](https://github.com/academic-wasteland/pangenome-town/blob/main/docs/resources-and-residents.md).

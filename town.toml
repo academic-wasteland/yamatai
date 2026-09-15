@@ -63,11 +63,12 @@ max_mem_gb = 16
 max_wall_seconds = 900
 
 [[sites]]
-# DDBJ (NIG supercomputer) is Yamatai's compute cluster; only Yamatai runs jobs there (decision 2026-09-14).
+# Yamatai holds Slurm submission capability; dataset custody is independent.
 # The `ddbj` ssh alias reaches the gw gateway, which has no Slurm configuration; jobs are submitted from the login
 # node a001 (a002 and a003 also work), so every remote step runs as `ssh ddbj ssh a001 ...`. Default partition: epyc.
 # bcftools 1.19 is installed there, vg is not, so graph deconstruction cannot run at DDBJ yet.
 name = "ddbj"
+storage = "ddbj"
 driver = "ssh"
 host = "ddbj"
 submit_host = "a001"
@@ -80,3 +81,53 @@ max_cpus = 8
 max_mem_gb = 64
 max_wall_seconds = 7200
 paths = { graph = "/home/asianhla/data/JaSaPaGe/JaSaPaGe.gbz", vcf = "/home/asianhla/data/JaSaPaGe/JaSaPaGe.GRCh38.vcf.gz", "jpt-individual-genotypes" = "/home/asianhla/data/JaSaPaGe/JaSaPaGe.GRCh38.vcf.gz" }
+
+[federation]
+# Private relay identity for replies to independently hosted towns.
+state = "~/.config/wasteland-bridge/yamatai"
+
+# Bounded direct execution explicitly permitted by the operator on DDBJ.
+# Heavy jobs use Yamatai's Slurm route; logical dataset grants select the cohort.
+[[sites]]
+name = "ddbj-direct"
+storage = "ddbj"
+driver = "ssh"
+host = "ddbj"
+scheduler = "none"
+workdir = "/home/leechuck/wasteland/yamatai/direct"
+datasets = []
+tools = ["bcftools"]
+max_cpus = 1
+max_mem_gb = 2
+max_wall_seconds = 600
+
+[custody]
+key = "~/.config/wasteland-custody/yamatai/custody.key"
+
+[[datasets]]
+id = "ubar-jasapage"
+version = "JaSaPaGe-v1-GRCh38"
+custodian = "ubar"
+public_key = "ed25519:ycDcbml6y3aSfONP9yQ4ZhtzJvPJR0w9Ejqb1Bctt9I"
+samples = ["ksa001", "ksa002", "ksa003", "ksa004", "ksa005", "ksa006", "ksa007", "ksa008", "ksa009"]
+access = "public-source"
+workflows = ["allele-frequency", "genotype-export"]
+[datasets.locations.ddbj]
+vcf = "/home/asianhla/data/JaSaPaGe/JaSaPaGe.GRCh38.vcf.gz"
+
+[[datasets]]
+id = "yamatai-jasapage"
+version = "JaSaPaGe-v1-GRCh38"
+custodian = "yamatai"
+public_key = "ed25519:FPjKRojfkOv51G7Mrwg-zYler0N8pzHo5SzH-RHXsE0"
+samples = ["NA18940", "NA18943", "NA18945", "NA18952", "NA18970", "NA18990", "NA19007", "NA19066", "NA19079", "NA19088"]
+access = "public-source"
+workflows = ["allele-frequency", "genotype-export"]
+[datasets.locations.ddbj]
+vcf = "/home/asianhla/data/JaSaPaGe/JaSaPaGe.GRCh38.vcf.gz"
+
+[[resources]]
+name = "pangenome-results"
+root = "/home/leechuck/Public/software/pangenome/hla-viz"
+source = "bio-ontology-research-group/pangenome — hla-viz generated results"
+include = ["*.tsv", "*.pdf", "stage3_tables/*.tsv", "figures/*.png", "figures/*.pdf", "plots/*.png", "plots/*.pdf", "gene_graphs/*.stats.tsv"]
