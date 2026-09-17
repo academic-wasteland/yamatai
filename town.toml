@@ -135,3 +135,4 @@ include = ["*.tsv", "*.pdf", "stage3_tables/*.tsv", "figures/*.png", "figures/*.
 [private_variant_demo]
 enabled = true
 vcf = "/home/leechuck/Public/software/academic-wasteland/yamatai/.gc/private-variant-demo/patient.vcf"
+metadata = "/home/leechuck/Public/software/academic-wasteland/yamatai/synthetic-patient-vcf.json"
