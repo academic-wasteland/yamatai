@@ -131,3 +131,7 @@ name = "pangenome-results"
 root = "/home/leechuck/Public/software/pangenome/hla-viz"
 source = "bio-ontology-research-group/pangenome — hla-viz generated results"
 include = ["*.tsv", "*.pdf", "stage3_tables/*.tsv", "figures/*.png", "figures/*.pdf", "plots/*.png", "plots/*.pdf", "gene_graphs/*.stats.tsv"]
+
+[private_variant_demo]
+enabled = true
+vcf = "/home/leechuck/Public/software/academic-wasteland/yamatai/.gc/private-variant-demo/patient.vcf"
